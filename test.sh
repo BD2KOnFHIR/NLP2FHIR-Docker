@@ -62,15 +62,6 @@ echo
 echo NLP2FHIR_BRANCH : $NLP2FHIR_BRANCH
 echo NLP2FHIR_REPO   : $NLP2FHIR_REPO
 echo
-#*****************************************************************
-# Remove target directories and recreate them fresh.
-#*****************************************************************
-rm -rf $ROOT_DIR/target
-
-mkdir $ROOT_DIR/target
-mkdir $ROOT_DIR/target/artifacts
-mkdir $ROOT_DIR/target/artifacts/lib
-mkdir $ROOT_DIR/target/artifacts/resources
 
 #*****************************************************************
 # Verify that the ./UMLS and ./SNOMEDCT_US directories exist
@@ -103,6 +94,19 @@ else
 fi
 
 #*****************************************************************
+# Remove target directories and recreate them fresh.
+#*****************************************************************
+rm -rf $ROOT_DIR/target
+
+mkdir $ROOT_DIR/target
+mkdir $ROOT_DIR/target/$DIR_UMLS
+mkdir $ROOT_DIR/target/$DIR_SNOMED
+mkdir $ROOT_DIR/target/artifacts
+mkdir $ROOT_DIR/target/artifacts/lib
+mkdir $ROOT_DIR/target/artifacts/resources
+
+
+#*****************************************************************
 # Create a maven container
 #*****************************************************************
 MAVEN_CONTAINER=$(docker run -d -P --name maven -v ~/.m2:/root/.m2:rw ubuntu)
@@ -114,9 +118,11 @@ MAVEN_CONTAINER=$(docker run -d -P --name maven -v ~/.m2:/root/.m2:rw ubuntu)
 cd artifact-builder
 docker build -t artifact-builder .
 docker run --rm \
+  -v $ROOT_DIR/:/root \
   -v $ROOT_DIR/target:/target \
   -v $ROOT_DIR/target/artifacts/lib:/nlp2fhir_lib \
   -v $ROOT_DIR/target/artifacts/resources:/resources \
+  -e DIR_UMLS=$DIR_UMLS -e DIR_SNOMED=$DIR_SNOMED \
   -e UMLS_VTS_BRANCH=$UMLS_VTS_BRANCH -e UMLS_VTS_REPO=$UMLS_VTS_REPO \
   -e MED_TAGGER_BRANCH=$MED_TAGGER_BRANCH -e MED_TAGGER_REPO=$MED_TAGGER_REPO \
   -e MED_TIME_BRANCH=$MED_TIME_BRANCH -e MED_TIME_REPO=$MED_TIME_REPO \

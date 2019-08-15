@@ -21,4 +21,7 @@ ENV JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
 
 ADD test.sh /
 
+# Add files that are not in the existing repositories.
+ADD snomeddictionaryfhir.zip /
+
 CMD bash /test.sh

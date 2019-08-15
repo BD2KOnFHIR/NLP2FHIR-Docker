@@ -3,6 +3,13 @@
 # Set the PATH env. variable
 export PATH=${PATH}:/nlp2fhir_lib:/resources
 
+# Copy the UMLS and SNOMEDCT_US directories to the target directory.
+echo "*************************************************************************"
+echo "Copying the UMLS and SNOMEDCT_US directories to the target directory."
+echo "*************************************************************************"
+cp  -R root/$DIR_UMLS /target/$DIR_UMLS
+cp  -R root/$DIR_SNOMED /target/$DIR_SNOMED
+
 # MedTagger
 echo "*************************************************************************"
 echo "Cloning git repository $MED_TAGGER_REPO from branch $MED_TAGGER_BRANCH"
@@ -76,7 +83,6 @@ git clone -b $UIMA_STREAM_SERVER_BRANCH $UIMA_STREAM_SERVER_REPO && \
     cp UIMA-Server-REST/target/*.jar /nlp2fhir_lib && \
     cd ..
 
-
 # cTAKES
 echo "*************************************************************************"
 echo "Downloading cTAKES reources package... this will take a few minutes."
@@ -106,6 +112,14 @@ git clone -b $NLP2FHIR_BRANCH $NLP2FHIR_REPO && \
       cp NLP2FHIR-STREAM/target/*.jar /nlp2fhir_lib
       cp NLP2FHIR-WEB/target/*.war /nlp2fhir_lib
       cd ..
+
+#*****************************************************************
+# Copy the snomeddictionaryfhirner directory contents to
+# two different places
+#*****************************************************************
+unzip snomeddictionaryfhir.zip && \
+cp -a /snomeddictionaryfhir/. /resources/org/apache/ctakes/dictionary/lookup/fast/
+cp -a /snomeddictionaryfhir/. /target/org/apache/ctakes/dictionary/lookup/fast/
 
 #*****************************************************************
 # Change permission of /nlp2fhir_lib jars and /resources
