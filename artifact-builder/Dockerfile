@@ -24,4 +24,7 @@ ADD test.sh /
 # Add files that are not in the existing repositories.
 ADD snomeddictionaryfhir.zip /
 
+# Add the NLP2FHIR GUI run commands.
+ADD run_linux.sh /
+
 CMD bash /test.sh

@@ -88,7 +88,7 @@ if [ "$(ls -A $DIR_SNOMED)" ]; then
      echo ""
 else
     echo "The $DIR_SNOMED directory is Empty"
-    echo "The SNOMEDCT US Edition resource files (downloadable with a UMLS license, need to be placed in the ./SNOMEDCT_US directory."
+    echo "The SNOMEDCT US Edition resource files (downloadable with a UMLS license), need to be placed in the ./SNOMEDCT_US directory."
     echo ""
     exit
 fi
