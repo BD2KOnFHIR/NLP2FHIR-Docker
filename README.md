@@ -6,8 +6,9 @@ The NLP2FHIR-Docker project was created to ease the burden of building the [NLP2
 ## Details
 
 ### Prerequisites
-To run this project, you will need Docker installed. 
-This project also requires you to have a [UMLS license](https://uts.nlm.nih.gov/license.html).
+To run this project, you will need the following:
+* **Docker installed**. 
+* This project also requires you to have a **[UMLS license](https://uts.nlm.nih.gov/license.html)**.
 
 
 After cloning the project, cd to the NLP2FHIR-Docker directory.  In this directory, you will need to supply two additional directories (**UMLS** and **SNOMEDCT_US**).  Both of these resources require you to have a [UMLS license](https://uts.nlm.nih.gov/license.html).  As such, it is the responsibility of the user to manually download the UMLS and SNOMEDCT_US.
