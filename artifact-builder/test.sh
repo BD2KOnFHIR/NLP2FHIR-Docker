@@ -124,7 +124,7 @@ cp -a /snomeddictionaryfhir/. /target/org/apache/ctakes/dictionary/lookup/fast/
 #*****************************************************************
 # Copy the NLP2FHIR GUI run commands to the target directory.
 #*****************************************************************
-cp run_linux.sh /target/
+cp run_nlp2fir-gui_linux.sh /target/
 
 #*****************************************************************
 # Change permission of /nlp2fhir_lib jars and /resources
