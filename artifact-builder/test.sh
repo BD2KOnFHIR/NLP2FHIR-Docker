@@ -7,8 +7,8 @@ export PATH=${PATH}:/nlp2fhir_lib:/resources
 echo "*************************************************************************"
 echo "Copying the UMLS and SNOMEDCT_US directories to the target directory."
 echo "*************************************************************************"
-cp  -R root/$DIR_UMLS /target/$DIR_UMLS
-cp  -R root/$DIR_SNOMED /target/$DIR_SNOMED
+cp  -R root/$DIR_UMLS/* /target/$DIR_UMLS
+cp  -R root/$DIR_SNOMED/* /target/$DIR_SNOMED
 
 # MedTagger
 echo "*************************************************************************"
