@@ -104,6 +104,9 @@ REM *****************************************************************
 REM *****************************************************************
 REM  Remove target directories and recreate them fresh.
 REM *****************************************************************
+echo creating clean artifact directory
+echo %ROOT_DIR%\target
+
 rd /s /q %ROOT_DIR%\target
 
 mkdir %ROOT_DIR%\target
@@ -114,16 +117,38 @@ mkdir %ROOT_DIR%\target\artifacts\lib
 mkdir %ROOT_DIR%\target\artifacts\resources
 
 
-#*****************************************************************
-# Create a maven container
-#*****************************************************************
-set MAVEN_CONTAINER=(docker run -d -P --name maven -v ~\.m2:\root\.m2:rw ubuntu)
+REM *****************************************************************
+REM  Create a maven container
+REM *****************************************************************
+FOR /F "delims=" %%A IN ('docker run -d -P --name maven -v ~\.m2:/root/.m2:rw ubuntu') do SET "MAVEN_CONTAINER=%%A"
+echo MAVEN_CONTAINER= %MAVEN_CONTAINER%
+
+REM *****************************************************************
+REM  Artifact builder will build MedTagger, cTAKES, MedTime,
+REM  MedXN, and UMLS_VTS
+REM *****************************************************************
+cd artifact-builder
+docker run --rm ^
+  -v %ROOT_DIR%\:/root ^
+  -v %ROOT_DIR%\target:/target ^
+  -v %ROOT_DIR%\target\artifacts\lib:/nlp2fhir_lib ^
+  -v %ROOT_DIR%\target\artifacts\resources:/resources ^
+  -e DIR_UMLS=%DIR_UMLS% -e DIR_SNOMED=%DIR_SNOMED% ^
+  -e UMLS_VTS_BRANCH=%UMLS_VTS_BRANCH% -e UMLS_VTS_REPO=%UMLS_VTS_REPO% ^
+  -e MED_TAGGER_BRANCH=%MED_TAGGER_BRANCH% -e MED_TAGGER_REPO=%MED_TAGGER_REPO% ^
+  -e MED_TIME_BRANCH=%MED_TIME_BRANCH% -e MED_TIME_REPO=%MED_TIME_REPO% ^
+  -e MED_XN_BRANCH=%MED_XN_BRANCH% -e MED_XN_REPO=%MED_XN_REPO% ^
+  -e UIMA_STREAM_SERVER_BRANCH=%UIMA_STREAM_SERVER_BRANCH% -e UIMA_STREAM_SERVER_REPO=%UIMA_STREAM_SERVER_REPO% ^
+  -e NLP2FHIR_BRANCH=%NLP2FHIR_BRANCH% -e NLP2FHIR_REPO=%NLP2FHIR_REPO% ^
+  --volumes-from maven endlecm/artifact-builder:1.0.1.SNAPSHOT
+cd ..
+
+REM *****************************************************************
+REM  Remove maven container
+REM *****************************************************************
+docker stop %MAVEN_CONTAINER%
+docker rm %MAVEN_CONTAINER%
 
 
-#*****************************************************************
-# Remove maven container
-#*****************************************************************
-docker stop $MAVEN_CONTAINER
-docker rm $MAVEN_CONTAINER
 :Exit
 echo END OF PROGRAM
