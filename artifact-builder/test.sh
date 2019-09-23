@@ -113,6 +113,12 @@ git clone -b $NLP2FHIR_BRANCH $NLP2FHIR_REPO && \
       cp NLP2FHIR-WEB/target/*.war /nlp2fhir_lib
       cd ..
 
+cp -R /resources/desc/* /target/resources
+cp -R /resources/* /target/resources
+
+cp -R /resources/desc/* /nlp2fhir_lib
+cp -R /resources/* /nlp2fhir_lib
+
 #*****************************************************************
 # Copy the snomeddictionaryfhirner directory contents to
 # two different places

@@ -5,15 +5,15 @@ REM  https://github.com/BD2KOnFHIR/NLP2FHIR
 REM  This script will create a Docker container to pull and build the
 REM  multiple software projects required and place them in a ./target
 REM  diretory.
-REM 
+REM
 REM  Requirement:  UMLS requires a user license.  As such, it is
 REM  the responsibility of the user to manually download the UMLS and
 REM  and SNOMEDCT_US.
-REM 
+REM
 REM   - The MRCONSO.RRF file from a copy of the UMLS (placed in ./UMLS)
 REM   - SNOMEDCT US Edition resource files (downloadable with a UMLS
 REM     license, placed in ./SNOMEDCT_US)
-REM 
+REM
 REM *****************************************************************
 
 set "ROOT_DIR=%cd%"
@@ -115,7 +115,7 @@ mkdir %ROOT_DIR%\target\%DIR_SNOMED%
 mkdir %ROOT_DIR%\target\artifacts
 mkdir %ROOT_DIR%\target\artifacts\lib
 mkdir %ROOT_DIR%\target\artifacts\resources
-
+mkdir %ROOT_DIR%\target\resources
 
 REM *****************************************************************
 REM  Create a maven container

@@ -104,6 +104,7 @@ mkdir $ROOT_DIR/target/$DIR_SNOMED
 mkdir $ROOT_DIR/target/artifacts
 mkdir $ROOT_DIR/target/artifacts/lib
 mkdir $ROOT_DIR/target/artifacts/resources
+mkdir $ROOT_DIR/target/resources
 
 
 #*****************************************************************
@@ -130,6 +131,7 @@ docker run --rm \
   -e UIMA_STREAM_SERVER_BRANCH=$UIMA_STREAM_SERVER_BRANCH -e UIMA_STREAM_SERVER_REPO=$UIMA_STREAM_SERVER_REPO \
   -e NLP2FHIR_BRANCH=$NLP2FHIR_BRANCH -e NLP2FHIR_REPO=$NLP2FHIR_REPO \
   --volumes-from maven artifact-builder
+  #--volumes-from maven  endlecm/artifact-builder:1.0.1.SNAPSHOT
 cd ..
 
 #*****************************************************************
