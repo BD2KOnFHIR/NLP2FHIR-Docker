@@ -38,6 +38,7 @@ git clone -b $MED_TIME_BRANCH $MED_TIME_REPO && \
     # Copy resources to the resources and root directories
     cp -R src/main/resources/* /resources
     cp -R src/main/resources/* /target
+    cp -R resources/* /target/resources
     cd ..
 
 # MedXN
