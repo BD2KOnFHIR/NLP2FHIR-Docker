@@ -117,7 +117,7 @@ MAVEN_CONTAINER=$(docker run -d -P --name maven -v ~/.m2:/root/.m2:rw ubuntu)
 # MedXN, and UMLS_VTS
 #*****************************************************************
 cd artifact-builder
-docker build -t artifact-builder .
+#docker build -t artifact-builder .
 docker run --rm \
   -v $ROOT_DIR/:/root \
   -v $ROOT_DIR/target:/target \
@@ -130,8 +130,8 @@ docker run --rm \
   -e MED_XN_BRANCH=$MED_XN_BRANCH -e MED_XN_REPO=$MED_XN_REPO \
   -e UIMA_STREAM_SERVER_BRANCH=$UIMA_STREAM_SERVER_BRANCH -e UIMA_STREAM_SERVER_REPO=$UIMA_STREAM_SERVER_REPO \
   -e NLP2FHIR_BRANCH=$NLP2FHIR_BRANCH -e NLP2FHIR_REPO=$NLP2FHIR_REPO \
-  --volumes-from maven artifact-builder
-  #--volumes-from maven  endlecm/artifact-builder:1.0.1.SNAPSHOT
+  --volumes-from maven endlecm/artifact-builder:1.0.3.SNAPSHOT
+  #--volumes-from maven artifact-builder
 cd ..
 
 #*****************************************************************
