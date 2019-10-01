@@ -17,6 +17,7 @@ echo "*************************************************************************"
 
 git clone -b $MED_TAGGER_BRANCH $MED_TAGGER_REPO && \
     cd MedTagger/ && \
+    git checkout $MED_TAGGER_TAG && \
     mvn clean install && \
     # Copy artifacts of build to /nlp2fhir_lib directory
     cp target/*.jar /nlp2fhir_lib && \
@@ -32,6 +33,7 @@ echo "*************************************************************************"
 
 git clone -b $MED_TIME_BRANCH $MED_TIME_REPO && \
     cd MedTime/ && \
+    git checkout $MED_TIME_TAG && \
     mvn clean install && \
     # Copy artifacts of build to /nlp2fhir_lib directory
     cp target/*.jar /nlp2fhir_lib && \
@@ -48,6 +50,7 @@ echo "*************************************************************************"
 
 git clone -b $MED_XN_BRANCH $MED_XN_REPO && \
     cd MedXN/ && \
+    git checkout $MED_XN_TAG && \
     mvn clean install && \
     # Copy artifacts of build to /nlp2fhir_lib directory
     cp target/*.jar /nlp2fhir_lib && \
@@ -66,6 +69,7 @@ echo "*************************************************************************"
 
 git clone -b $UMLS_VTS_BRANCH $UMLS_VTS_REPO && \
     cd UMLS_VTS/ && \
+    git checkout $UMLS_VTS_TAG && \
     mvn clean install && \
     # Copy artifacts of build to /nlp2fhir_lib directory
     cp target/*.jar /nlp2fhir_lib
@@ -77,6 +81,7 @@ echo "Cloning git repository $UIMA_STREAM_SERVER_REPO from branch $UIMA_STREAM_S
 echo "*************************************************************************"
 git clone -b $UIMA_STREAM_SERVER_BRANCH $UIMA_STREAM_SERVER_REPO && \
     cd UIMA-Stream-Server/ && \
+    git checkout $UIMA_STREAM_SERVER_TAG && \
     mvn clean install && \
     # Copy artifacts of build to /nlp2fhir_lib directory
     cp UIMA-Server-Core/target/*.jar /nlp2fhir_lib && \
@@ -105,6 +110,7 @@ echo "path =  $PATH"
 
 git clone -b $NLP2FHIR_BRANCH $NLP2FHIR_REPO && \
       cd NLP2FHIR/ && \
+      git checkout $NLP2FHIR_TAG && \
       mvn clean install && \
       # Copy artifacts of build to /nlp2fhir_lib directory
       cp AnnotationUtils/target/*.jar /nlp2fhir_lib
