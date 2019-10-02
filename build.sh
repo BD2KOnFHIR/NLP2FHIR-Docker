@@ -26,19 +26,19 @@ UMLS_VTS_TAG=458ea9aa011d80422811619207e513224e3cb9d4
 
 MED_TAGGER_BRANCH=master
 MED_TAGGER_REPO=https://github.com/OHNLPIR/MedTagger.git
-MED_TAGGER_TAG=d20bc8bbba98578075254783bd5033f6f650ebac
+MED_TAGGER_TAG=v1.0.3
 
 MED_TIME_BRANCH=master
 MED_TIME_REPO=https://github.com/OHNLPIR/MedTime.git
-MED_TIME_TAG=cd3c676c78f3a88c7d5ead5f20c48671f3012384
+MED_TIME_TAG=78b4e6f1dc756c340aaad6002c0d37dae57fc23c
 
 MED_XN_BRANCH=master
 MED_XN_REPO=https://github.com/ohnlp/MedXN.git
-MED_XN_TAG=d623e1b7141cda7e93b4665e9da8fc4441972f13
+MED_XN_TAG=9d178b32fc17426a7c92311a39907cb95a601e58
 
 NLP2FHIR_BRANCH=master
 NLP2FHIR_REPO=https://github.com/BD2KOnFHIR/NLP2FHIR.git
-NLP2FHIR_TAG=40e466ae7e8fd0b84c2ad29dbbb6ce4fd3aa0386
+NLP2FHIR_TAG=6521d5dfb0e6536d4c532a15ebafe3802797dd52
 
 UIMA_STREAM_SERVER_BRANCH=master
 UIMA_STREAM_SERVER_REPO=https://github.com/OHNLPIR/UIMA-Stream-Server.git
@@ -142,8 +142,9 @@ docker run --rm \
   -e MED_XN_BRANCH=$MED_XN_BRANCH -e MED_XN_REPO=$MED_XN_REPO -e MED_XN_TAG=$MED_XN_TAG \
   -e UIMA_STREAM_SERVER_BRANCH=$UIMA_STREAM_SERVER_BRANCH -e UIMA_STREAM_SERVER_REPO=$UIMA_STREAM_SERVER_REPO -e UIMA_STREAM_SERVER_TAG=$UIMA_STREAM_SERVER_TAG \
   -e NLP2FHIR_BRANCH=$NLP2FHIR_BRANCH -e NLP2FHIR_REPO=$NLP2FHIR_REPO  -e NLP2FHIR_TAG=$NLP2FHIR_TAG \
-  --volumes-from maven endlecm/artifact-builder:1.0.4.SNAPSHOT
+  --volumes-from maven endlecm/artifact-builder:1.0.5.SNAPSHOT
 #  --volumes-from maven artifact-builder
+
 cd ..
 
 #*****************************************************************
