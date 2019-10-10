@@ -106,18 +106,10 @@ else
 fi
 
 #*****************************************************************
-# Remove target directories and recreate them fresh.
+# Remove target directory.  It will be copied over after the builds
+# is complete.
 #*****************************************************************
 rm -rf $ROOT_DIR/target
-
-mkdir $ROOT_DIR/target
-mkdir $ROOT_DIR/target/$DIR_UMLS
-mkdir $ROOT_DIR/target/$DIR_SNOMED
-mkdir $ROOT_DIR/target/artifacts
-mkdir $ROOT_DIR/target/artifacts/lib
-mkdir $ROOT_DIR/target/artifacts/resources
-mkdir $ROOT_DIR/target/resources
-
 
 #*****************************************************************
 # Create a maven container
@@ -129,12 +121,9 @@ MAVEN_CONTAINER=$(docker run -d -P --name maven -v ~/.m2:/root/.m2:rw ubuntu)
 # MedXN, and UMLS_VTS
 #*****************************************************************
 cd artifact-builder
-#docker build -t artifact-builder .
-docker run --rm \
-  -v $ROOT_DIR/:/root \
-  -v $ROOT_DIR/target:/target \
-  -v $ROOT_DIR/target/artifacts/lib:/nlp2fhir_lib \
-  -v $ROOT_DIR/target/artifacts/resources:/resources \
+docker build -t artifact-builder .
+#docker run --rm \
+docker run --name artifactBuilder \
   -e DIR_UMLS=$DIR_UMLS -e DIR_SNOMED=$DIR_SNOMED \
   -e UMLS_VTS_BRANCH=$UMLS_VTS_BRANCH -e UMLS_VTS_REPO=$UMLS_VTS_REPO -e UMLS_VTS_TAG=$UMLS_VTS_TAG\
   -e MED_TAGGER_BRANCH=$MED_TAGGER_BRANCH -e MED_TAGGER_REPO=$MED_TAGGER_REPO -e MED_TAGGER_TAG=$MED_TAGGER_TAG \
@@ -142,13 +131,29 @@ docker run --rm \
   -e MED_XN_BRANCH=$MED_XN_BRANCH -e MED_XN_REPO=$MED_XN_REPO -e MED_XN_TAG=$MED_XN_TAG \
   -e UIMA_STREAM_SERVER_BRANCH=$UIMA_STREAM_SERVER_BRANCH -e UIMA_STREAM_SERVER_REPO=$UIMA_STREAM_SERVER_REPO -e UIMA_STREAM_SERVER_TAG=$UIMA_STREAM_SERVER_TAG \
   -e NLP2FHIR_BRANCH=$NLP2FHIR_BRANCH -e NLP2FHIR_REPO=$NLP2FHIR_REPO  -e NLP2FHIR_TAG=$NLP2FHIR_TAG \
-  --volumes-from maven endlecm/artifact-builder:1.0.5.SNAPSHOT
-#  --volumes-from maven artifact-builder
-
+  --volumes-from maven artifact-builder
+# --volumes-from maven endlecm/artifact-builder:1.0.5.SNAPSHOT
 cd ..
+
+ECHO Build complete, copying files to the target directory...
+docker cp artifactBuilder:target/ target
+
+# Copy the UMLS and SNOMEDCT_US directories to the target directory.
+echo "*************************************************************************"
+echo "Copying the UMLS and SNOMEDCT_US directories to the target directory."
+echo "*************************************************************************"
+mkdir $ROOT_DIR/target/$DIR_UMLS
+mkdir $ROOT_DIR/target/$DIR_SNOMED
+cp -R $ROOT_DIR/$DIR_UMLS/* target/$DIR_UMLS
+cp -R $ROOT_DIR/$DIR_SNOMED/* target/$DIR_SNOMED
 
 #*****************************************************************
 # Remove maven container
 #*****************************************************************
 docker stop $MAVEN_CONTAINER
 docker rm $MAVEN_CONTAINER
+
+#*****************************************************************
+# Remove artifactBuilder container
+#*****************************************************************
+docker rm artifactBuilder
