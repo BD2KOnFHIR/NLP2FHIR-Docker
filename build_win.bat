@@ -23,21 +23,27 @@ REM  Environment Variables
 REM *****************************************************************
 set UMLS_VTS_BRANCH=master
 set UMLS_VTS_REPO=https://github.com/OHNLPIR/UMLS_VTS.git
+set UMLS_VTS_TAG=458ea9aa011d80422811619207e513224e3cb9d4
 
 set MED_TAGGER_BRANCH=master
 set MED_TAGGER_REPO=https://github.com/OHNLPIR/MedTagger.git
+set MED_TAGGER_TAG=v1.0.3
 
 set MED_TIME_BRANCH=master
 set MED_TIME_REPO=https://github.com/OHNLPIR/MedTime.git
+set MED_TIME_TAG=78b4e6f1dc756c340aaad6002c0d37dae57fc23c
 
 set MED_XN_BRANCH=master
 set MED_XN_REPO=https://github.com/ohnlp/MedXN.git
+set MED_XN_TAG=9d178b32fc17426a7c92311a39907cb95a601e58
 
 set NLP2FHIR_BRANCH=master
 set NLP2FHIR_REPO=https://github.com/BD2KOnFHIR/NLP2FHIR.git
+set NLP2FHIR_TAG=6521d5dfb0e6536d4c532a15ebafe3802797dd52
 
 set UIMA_STREAM_SERVER_BRANCH=master
 set UIMA_STREAM_SERVER_REPO=https://github.com/OHNLPIR/UIMA-Stream-Server.git
+set UIMA_STREAM_SERVER_TAG=785a233c4b692633a9ed026cf0415849faa19341
 
 REM *****************************************************************
 REM  Output the variables being used
@@ -47,21 +53,27 @@ echo "*** Environment Variables ***"
 echo
 echo UMLS_VTS_BRANCH : %UMLS_VTS_BRANCH%
 echo UMLS_VTS_REPO   : %UMLS_VTS_REPO%
+echo UMLS_VTS_TAG    : %UMLS_VTS_TAG%
 echo
 echo MED_TAGGER_BRANCH : %MED_TAGGER_BRANCH%
 echo MED_TAGGER_REPO   : %MED_TAGGER_REPO%
+echo MED_TAGGER_TAG    : %MED_TAGGER_TAG%
 echo
 echo MED_TIME_BRANCH : %MED_TIME_BRANCH%
 echo MED_TIME_REPO   : %MED_TIME_REPO%
+echo MED_TIME_TAG    : %MED_TIME_TAG%
 echo
 echo MED_XN_BRANCH : %MED_XN_BRANCH%
 echo MED_XN_REPO   : %MED_XN_REPO%
+echo MED_XN_TAG    : %MED_XN_TAG%
 echo
 echo UIMA_STREAM_SERVER_BRANCH: %UIMA_STREAM_SERVER_BRANCH%
 echo UIMA_STREAM_SERVER_REPO  : %UIMA_STREAM_SERVER_REPO%
+echo UIMA_STREAM_SERVER_TAG   : %UIMA_STREAM_SERVER_TAG%
 echo
 echo NLP2FHIR_BRANCH : %NLP2FHIR_BRANCH%
 echo NLP2FHIR_REPO   : %NLP2FHIR_REPO%
+echo NLP2FHIR_TAG    : %NLP2FHIR_TAG%
 echo
 
 REM *****************************************************************
@@ -134,13 +146,13 @@ docker run --rm ^
   -v %ROOT_DIR%\target\artifacts\lib:/nlp2fhir_lib ^
   -v %ROOT_DIR%\target\artifacts\resources:/resources ^
   -e DIR_UMLS=%DIR_UMLS% -e DIR_SNOMED=%DIR_SNOMED% ^
-  -e UMLS_VTS_BRANCH=%UMLS_VTS_BRANCH% -e UMLS_VTS_REPO=%UMLS_VTS_REPO% ^
-  -e MED_TAGGER_BRANCH=%MED_TAGGER_BRANCH% -e MED_TAGGER_REPO=%MED_TAGGER_REPO% ^
-  -e MED_TIME_BRANCH=%MED_TIME_BRANCH% -e MED_TIME_REPO=%MED_TIME_REPO% ^
-  -e MED_XN_BRANCH=%MED_XN_BRANCH% -e MED_XN_REPO=%MED_XN_REPO% ^
-  -e UIMA_STREAM_SERVER_BRANCH=%UIMA_STREAM_SERVER_BRANCH% -e UIMA_STREAM_SERVER_REPO=%UIMA_STREAM_SERVER_REPO% ^
-  -e NLP2FHIR_BRANCH=%NLP2FHIR_BRANCH% -e NLP2FHIR_REPO=%NLP2FHIR_REPO% ^
-  --volumes-from maven endlecm/artifact-builder:1.0.1.SNAPSHOT
+  -e UMLS_VTS_BRANCH=%UMLS_VTS_BRANCH% -e UMLS_VTS_REPO=%UMLS_VTS_REPO% -e %UMLS_VTS_TAG=$UMLS_VTS_TAG% ^
+  -e MED_TAGGER_BRANCH=%MED_TAGGER_BRANCH% -e MED_TAGGER_REPO=%MED_TAGGER_REPO% -e %MED_TAGGER_TAG=$MED_TAGGER_TAG% ^
+  -e MED_TIME_BRANCH=%MED_TIME_BRANCH% -e MED_TIME_REPO=%MED_TIME_REPO% -e %MED_TIME_TAG=$MED_TIME_TAG% ^
+  -e MED_XN_BRANCH=%MED_XN_BRANCH% -e MED_XN_REPO=%MED_XN_REPO% -e %MED_XN_TAG=$MED_XN_TAG% ^
+  -e UIMA_STREAM_SERVER_BRANCH=%UIMA_STREAM_SERVER_BRANCH% -e UIMA_STREAM_SERVER_REPO=%UIMA_STREAM_SERVER_REPO% -e %UIMA_STREAM_SERVER_TAG=$UIMA_STREAM_SERVER_TAG% ^
+  -e NLP2FHIR_BRANCH=%NLP2FHIR_BRANCH% -e NLP2FHIR_REPO=%NLP2FHIR_REPO% -e %NLP2FHIR_TAG=$NLP2FHIR_TAG% ^
+  --volumes-from maven endlecm/artifact-builder:1.0.5.SNAPSHOT
 cd ..
 
 REM *****************************************************************
