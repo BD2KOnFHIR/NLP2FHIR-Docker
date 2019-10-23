@@ -13,11 +13,19 @@ To run this project, you will need the following:
 
 
 After cloning the project, cd to the NLP2FHIR-Docker directory.  In this directory, you will need to supply two additional directories (**UMLS** and **SNOMEDCT_US**).  Both of these resources require you to have a [UMLS license](https://uts.nlm.nih.gov/license.html).  As such, it is the responsibility of the user to manually download the UMLS and SNOMEDCT_US.
-* UMLS  - The MRCONSO.RRF file from a copy of the UMLS must be placed in the ./UMLS directory.
-* SNOMEDCT_US - The SNOMEDCT US Edition resource files (located at <SNOWMEDCT_US download dir>/Full/Terminology/*) must be placed in ./SNOMEDCT_US.
+* **UMLS** Directory - The MRCONSO.RRF file from a copy of the UMLS must be placed in the UMLS directory in the NLP2FHIR-Docker directory.
+* **SNOMEDCT_US** Directory - The SNOMEDCT US Edition resource files (located at <SNOWMEDCT_US download dir>/Full/Terminology/*) must be placed in the SNOMEDCT_US directory in the NLP2FHIR-Docker directory.
+
+The directory structure should look like this:
+* NLP2FHIR-Docker/UMLS
+* NLP2FHIR-Docker/SNOMEDCT_US
 
 ### Build
-Run the ./build.sh command to start the build process.
+Mac/Linux OS
+* Run the **./build.sh** command to start the build process.
+
+Windows OS
+* Run the **./build_win.bat** command to start the build process.
 
 The Docker container will do the following tasks:
 - Verify that the user has the directory NLP2FHIR-Docker/UMLS.
@@ -33,6 +41,11 @@ The Docker container will do the following tasks:
 - Create a run script to run the NLP2FHIR-GUI.
 
 ### Run
-After the build.sh command has completed, there will be a target directory.  
+After the build command has completed, there will be a target directory.  
 cd to this target directory.
-Run the **run_nlp2fir-gui_linux.sh** command to launch the NLP2FHIR-GUI.
+
+Mac/Linux OS
+* Run the **run_nlp2fir-gui_linux.sh** command to launch the NLP2FHIR-GUI.
+
+Windows OS
+* Run the **run_nlp2fir-gui_linux.sh** command to launch the NLP2FHIR-GUI.
