@@ -26,5 +26,6 @@ ADD snomeddictionaryfhir.zip /
 
 # Add the NLP2FHIR GUI run commands.
 ADD run_nlp2fir-gui_linux.sh /
+ADD run_nlp2fir-gui_windows.bat /
 
 CMD bash /test.sh
