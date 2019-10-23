@@ -152,7 +152,7 @@ docker run --rm ^
   -e MED_XN_BRANCH=%MED_XN_BRANCH% -e MED_XN_REPO=%MED_XN_REPO% -e MED_XN_TAG=%MED_XN_TAG% ^
   -e UIMA_STREAM_SERVER_BRANCH=%UIMA_STREAM_SERVER_BRANCH% -e UIMA_STREAM_SERVER_REPO=%UIMA_STREAM_SERVER_REPO% -e UIMA_STREAM_SERVER_TAG=%UIMA_STREAM_SERVER_TAG% ^
   -e NLP2FHIR_BRANCH=%NLP2FHIR_BRANCH% -e NLP2FHIR_REPO=%NLP2FHIR_REPO% -e NLP2FHIR_TAG=%NLP2FHIR_TAG% ^
-  --volumes-from maven endlecm/artifact-builder:1.0.5.SNAPSHOT
+  --volumes-from maven endlecm/artifact-builder:1.0.6.SNAPSHOT
 cd ..
 
 REM *****************************************************************
@@ -163,4 +163,4 @@ docker rm %MAVEN_CONTAINER%
 
 
 :Exit
-echo END OF PROGRAM
+echo END OF BUILD
