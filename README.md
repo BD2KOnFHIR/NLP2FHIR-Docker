@@ -7,6 +7,7 @@ The NLP2FHIR-Docker project was created to ease the burden of building the [NLP2
 
 ### Prerequisites
 To run this project, you will need the following:
+* **Git installed** to download this project. 
 * **Docker installed**. 
 * This project also requires you to have a **[UMLS license](https://uts.nlm.nih.gov/license.html)**.
 
